@@ -15,7 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        return response(Item::paginate(10), 200);
     }
 
     /**
@@ -33,34 +33,37 @@ class ItemController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Item $item
+     * @return Item
      */
-    public function show($id)
+    public function show(Item $item)
     {
-        //
+        return $item;
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param Item $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Item $item)
     {
-        //
+        $item->update($request->all());
+        return  response(null, 204);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Item $item
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Item $item)
     {
-        //
+        $item->delete();
+        return  response(null, 204);
     }
 }
